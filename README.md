@@ -1,8 +1,8 @@
 # mohammadi.com
 
-Personal website for Mohammad Mohammadi.
+Personal website and weblog for Mohammad Mohammadi.
 
-The site is intentionally static: Astro, TypeScript, system fonts, and no backend runtime. It is designed to deploy as plain files behind Nginx on the Ubuntu server that serves `mohammadi.com`.
+The site is intentionally static: Astro, TypeScript, Markdown content collections, system fonts, and no backend runtime. The homepage is the weblog index; durable profile, project, and contact context lives on `/about/`.
 
 ## Commands
 
@@ -18,17 +18,11 @@ npm run preview
 The deployment script builds locally, uploads `dist/` to the server over SSH, switches the current release symlink, and reloads Nginx.
 
 ```bash
-npm run deploy
+DEPLOY_HOST=username@example.com npm run deploy
 ```
 
-Defaults:
-
-- Host: `username@example.com`
-- Domain: `mohammadi.com`
-- Remote root: `/var/www/mohammadi.com`
-
-Override with environment variables:
+The deployment host is intentionally not stored in this public repository. Optional environment variables:
 
 ```bash
-DEPLOY_HOST=username@example.com REMOTE_ROOT=/var/www/mohammadi.com npm run deploy
+REMOTE_ROOT=/var/www/mohammadi.com DOMAIN=mohammadi.com WWW_DOMAIN=www.mohammadi.com npm run deploy
 ```

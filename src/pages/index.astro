@@ -1,59 +1,45 @@
 ---
-import ProjectCard from "@/components/ProjectCard.astro";
-import SocialLinks from "@/components/SocialLinks.astro";
+import { getCollection } from "astro:content";
+import PostList from "@/components/PostList.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { profile } from "@/data/profile";
+import { getSortedPosts } from "@/utils/posts";
+
+const posts = getSortedPosts(await getCollection("blog"));
+const featuredPosts = posts.filter((post) => post.data.featured);
+const recentPosts = posts.filter((post) => !post.data.featured);
 ---
 
 <BaseLayout>
-  <section class="hero section">
-    <div class="hero-copy">
-      <p class="eyebrow">{profile.location} / software engineer / open source</p>
-      <h1>{profile.name}</h1>
-      <p class="lede">{profile.headline}</p>
-      <p>{profile.intro}</p>
-      <div class="hero-actions" aria-label="Primary actions">
-        <span class="button primary contact-token">{profile.contactLabel}</span>
-        <a class="button" href="https://www.linkedin.com/in/mohammadmohammadi" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-      <SocialLinks compact />
-    </div>
-
-    <figure class="portrait">
-      <img src="/assets/mohammad-avatar.png" alt="Portrait of Mohammad Mohammadi" width="512" height="512" />
-      <figcaption>@{profile.handle} on GitHub</figcaption>
-    </figure>
-  </section>
-
-  <section class="section split-section" aria-labelledby="current-focus">
+  <section class="intro section narrow">
+    <a href="/about/" class="intro-avatar" aria-label={`About ${profile.name}`}>
+      <img src="/assets/mohammad-avatar.png" alt="" width="112" height="112" />
+    </a>
     <div>
-      <p class="eyebrow">Current focus</p>
-      <h2 id="current-focus">Useful software, kept small enough to understand.</h2>
-    </div>
-    <div class="focus-list">
-      {profile.focus.map((item) => <span>{item}</span>)}
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="featured-projects">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Selected work</p>
-        <h2 id="featured-projects">Projects with a practical bent.</h2>
+      <div class="title-row">
+        <h1>Hi, I'm @{profile.handle}.</h1>
+        <a class="rss-link" href="/rss.xml" aria-label="RSS feed">RSS</a>
       </div>
-      <a href="/projects/">All projects</a>
-    </div>
-    <div class="project-grid">
-      {profile.projects.slice(0, 3).map((project) => <ProjectCard project={project} />)}
+      <p class="lede">{profile.blogIntro}</p>
+      <p>{profile.headline}</p>
     </div>
   </section>
 
-  <section class="section notes-strip" aria-labelledby="latest-note">
-    <div>
-      <p class="eyebrow">Latest note</p>
-      <h2 id="latest-note">{profile.notes[0].title}</h2>
-      <p>{profile.notes[0].description}</p>
-    </div>
-    <a class="button primary" href={profile.notes[0].href}>Read note</a>
+  {featuredPosts.length > 0 && (
+    <section class="section narrow post-section" aria-labelledby="featured-posts">
+      <h2 id="featured-posts">Featured</h2>
+      <PostList posts={featuredPosts} headingLevel="h3" />
+    </section>
+  )}
+
+  {recentPosts.length > 0 && (
+    <section class="section narrow post-section" aria-labelledby="recent-posts">
+      <h2 id="recent-posts">Recent posts</h2>
+      <PostList posts={recentPosts.slice(0, 8)} headingLevel="h3" />
+    </section>
+  )}
+
+  <section class="section narrow all-posts-link">
+    <a class="button" href="/posts/">All posts</a>
   </section>
 </BaseLayout>

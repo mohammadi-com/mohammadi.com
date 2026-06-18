@@ -8,6 +8,8 @@ export const profile = {
     "Software engineer building practical tools with Python, FastAPI, TypeScript, and open source habits.",
   intro:
     "I like software that removes friction: tools for job seekers, automation for repetitive work, and small systems that stay understandable after they ship.",
+  blogIntro:
+    "Writing about backend systems, automation, open-source experiments, and the practical edges of building useful software.",
   availability:
     "Open to focused engineering conversations around backend systems, automation, developer tooling, and product ideas that need a pragmatic build path.",
   links: [
@@ -72,16 +74,6 @@ export const profile = {
       description:
         "A small FastAPI project from the archive, kept as part of the public engineering trail.",
       tags: ["Python", "FastAPI", "API"],
-    },
-  ],
-  notes: [
-    {
-      title: "This site is now the home base",
-      href: "/notes/this-site-is-now-the-home-base/",
-      date: "18 Jun 2026",
-      description:
-        "A short launch note on making mohammadi.com the place for projects, writing, and durable links.",
-      minutes: 2,
     },
   ],
 };

@@ -1,22 +1,10 @@
 ---
-import SocialLinks from "@/components/SocialLinks.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { profile } from "@/data/profile";
 ---
 
-<BaseLayout title="Contact" description={`Contact ${profile.name}.`}>
-  <section class="page-hero section narrow">
-    <p class="eyebrow">Contact</p>
-    <h1>The simplest path is email.</h1>
-    <p class="lede">{profile.availability}</p>
-    <div class="hero-actions">
-      <span class="button primary contact-token">{profile.contactLabel}</span>
-      <a class="button" href="https://www.linkedin.com/in/mohammadmohammadi" target="_blank" rel="noreferrer">LinkedIn</a>
-    </div>
-  </section>
-
-  <section class="section content-section narrow">
-    <h2>Profiles</h2>
-    <SocialLinks />
+<BaseLayout title="Contact moved" description="Contact details now live on the About page.">
+  <section class="section narrow moved-page">
+    <h1>Contact moved to About.</h1>
+    <p><a href="/about/#contact">Go to contact details</a>.</p>
   </section>
 </BaseLayout>

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HOST="${DEPLOY_HOST:-username@example.com}"
+HOST="${DEPLOY_HOST:?Set DEPLOY_HOST to the SSH target, for example username@example.com}"
 REMOTE_USER="${REMOTE_USER:-ubuntu}"
 REMOTE_ROOT="${REMOTE_ROOT:-/var/www/mohammadi.com}"
 DOMAIN="${DOMAIN:-mohammadi.com}"

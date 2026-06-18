@@ -5,11 +5,13 @@ import "@/styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  type?: "website" | "article";
 }
 
 const {
   title,
   description = profile.intro,
+  type = "website",
 } = Astro.props;
 
 const pageTitle = title ? `${title} - ${profile.name}` : `${profile.name} - Software Engineer`;
@@ -17,12 +19,12 @@ const canonical = new URL(Astro.url.pathname, "https://mohammadi.com").toString(
 const image = "https://mohammadi.com/assets/mohammad-avatar.png";
 const sameAs = profile.links.map((link) => link.href);
 const navItems = [
-  { label: "Home", href: "/" },
+  { label: "Posts", href: "/" },
   { label: "About", href: "/about/" },
-  { label: "Projects", href: "/projects/" },
-  { label: "Notes", href: "/notes/" },
-  { label: "Contact", href: "/contact/" },
+  { label: "Search", href: "/search/" },
 ];
+const isActive = (href: string) =>
+  href === "/" ? Astro.url.pathname === "/" : Astro.url.pathname.startsWith(href);
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -51,7 +53,7 @@ const personJsonLd = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -73,7 +75,7 @@ const personJsonLd = {
         </a>
         <div class="nav-links">
           {navItems.map((item) => (
-            <a href={item.href} aria-current={Astro.url.pathname === item.href ? "page" : undefined}>
+            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
               {item.label}
             </a>
           ))}
@@ -86,11 +88,11 @@ const personJsonLd = {
     </main>
 
     <footer class="site-footer">
-      <div>
-        <strong>{profile.name}</strong>
-        <p>{profile.location} - {profile.headline}</p>
-      </div>
-      <span class="footer-contact">{profile.contactLabel}</span>
+      <p>
+        <strong>{profile.domain}</strong>
+        <span>Writing, projects, and durable links.</span>
+      </p>
+      <a href="/rss.xml">RSS</a>
     </footer>
   </body>
 </html>

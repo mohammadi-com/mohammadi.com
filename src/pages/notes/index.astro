@@ -1,26 +1,10 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { profile } from "@/data/profile";
 ---
 
-<BaseLayout title="Notes" description={`Notes and writing by ${profile.name}.`}>
-  <section class="page-hero section narrow">
-    <p class="eyebrow">Notes</p>
-    <h1>Short writing from the workbench.</h1>
-    <p class="lede">
-      A place for engineering notes, project updates, and lessons that are worth keeping outside a social feed.
-    </p>
-  </section>
-
-  <section class="section note-list narrow" aria-label="Notes">
-    {profile.notes.map((note) => (
-      <article class="note-item">
-        <div>
-          <p class="note-meta">{note.date} / {note.minutes} min read</p>
-          <h2><a href={note.href}>{note.title}</a></h2>
-          <p>{note.description}</p>
-        </div>
-      </article>
-    ))}
+<BaseLayout title="Notes moved" description="Notes now live in Posts.">
+  <section class="section narrow moved-page">
+    <h1>Notes moved to Posts.</h1>
+    <p><a href="/posts/">Go to the posts archive</a>.</p>
   </section>
 </BaseLayout>

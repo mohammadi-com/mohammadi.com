@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "@/components/PostList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { profile } from "@/data/profile";
+import { getSortedPosts } from "@/utils/posts";
+
+const posts = getSortedPosts(await getCollection("blog"));
+---
+
+<BaseLayout title="Posts" description={`Writing by ${profile.name}.`}>
+  <section class="page-hero section narrow">
+    <p class="eyebrow">Posts</p>
+    <h1>Writing from the workbench.</h1>
+    <p class="lede">
+      Notes on software, automation, public projects, and the practical edges of building useful tools.
+    </p>
+  </section>
+
+  <section class="section narrow post-section" aria-label="All posts">
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>

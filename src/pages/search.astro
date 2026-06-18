@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { formatPostDate, getPostHref, getSortedPosts } from "@/utils/posts";
+
+const posts = getSortedPosts(await getCollection("blog"));
+---
+
+<BaseLayout title="Search" description="Search posts on mohammadi.com.">
+  <section class="page-hero section narrow">
+    <p class="eyebrow">Search</p>
+    <h1>Find a post.</h1>
+    <label class="search-box">
+      <span>Search posts</span>
+      <input id="post-search" type="search" placeholder="backend, FastAPI, website..." autocomplete="off" />
+    </label>
+  </section>
+
+  <section class="section narrow post-section" aria-label="Search results">
+    <ul id="search-results" class="post-list">
+      {posts.map((post) => (
+        <li
+          class="post-row"
+          data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(" ")}`.toLowerCase()}
+        >
+          <article>
+            <a class="post-title-link" href={getPostHref(post)}><h2>{post.data.title}</h2></a>
+            <p class="post-meta">
+              <time datetime={post.data.pubDatetime.toISOString()}>{formatPostDate(post.data.pubDatetime)}</time>
+            </p>
+            <p>{post.data.description}</p>
+          </article>
+        </li>
+      ))}
+    </ul>
+    <p id="empty-search" class="empty-state" hidden>No matching posts yet.</p>
+  </section>
+</BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("#post-search");
+  const rows = Array.from(document.querySelectorAll<HTMLElement>("#search-results .post-row"));
+  const empty = document.querySelector<HTMLElement>("#empty-search");
+
+  input?.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    let visible = 0;
+
+    rows.forEach(row => {
+      const match = !query || row.dataset.search?.includes(query);
+      row.hidden = !match;
+      if (match) visible += 1;
+    });
+
+    if (empty) empty.hidden = visible > 0;
+  });
+</script>
