@@ -1,0 +1,30 @@
+---
+import SocialLinks from "@/components/SocialLinks.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { profile } from "@/data/profile";
+---
+
+<BaseLayout title="About" description={`About ${profile.name}, a software engineer in ${profile.location}.`}>
+  <section class="page-hero section narrow">
+    <p class="eyebrow">About</p>
+    <h1>I build practical software and keep a public engineering trail.</h1>
+    <p class="lede">
+      I am Mohammad Mohammadi, a software engineer based in London. My public work points to a steady interest in backend systems, automation, job-search tooling, and open-source practice.
+    </p>
+  </section>
+
+  <section class="section content-section narrow">
+    <h2>What I care about</h2>
+    <p>
+      I prefer software that has a clear job: help someone apply faster, automate a repetitive path, expose a clean API, or make a technical process easier to repeat. Python and FastAPI are comfortable tools for me, while TypeScript is useful when the interface needs to be direct and polished.
+    </p>
+    <p>
+      This site is meant to be the durable place for that work: projects, short notes, contact links, and context that should not be scattered across social profiles.
+    </p>
+  </section>
+
+  <section class="section content-section narrow">
+    <h2>Elsewhere</h2>
+    <SocialLinks />
+  </section>
+</BaseLayout>

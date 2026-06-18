@@ -1,0 +1,19 @@
+---
+import type { Project } from "@/data/profile";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <div>
+    <h3><a href={project.href} target="_blank" rel="noreferrer">{project.name}</a></h3>
+    <p>{project.description}</p>
+  </div>
+  <ul class="tag-list" aria-label={`${project.name} tags`}>
+    {project.tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+</article>

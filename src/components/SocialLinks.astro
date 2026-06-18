@@ -1,0 +1,18 @@
+---
+import { profile } from "@/data/profile";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class:list={["social-links", { compact }]} aria-label="Social links">
+  {profile.links.map((link) => (
+    <a href={link.href} target="_blank" rel="noreferrer">
+      <span>{link.label}</span>
+      <small>{link.handle}</small>
+    </a>
+  ))}
+</div>
