@@ -3,9 +3,6 @@ author: Mohammad Mohammadi
 pubDatetime: 2026-06-18T09:00:00+01:00
 title: This site is now the home base
 featured: true
-tags:
-  - site
-  - personal
 description: A short note on making this site the durable home for writing and project notes.
 ---
 
