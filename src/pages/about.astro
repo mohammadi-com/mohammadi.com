@@ -1,53 +1,36 @@
 ---
-import SocialLinks from "@/components/SocialLinks.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { profile } from "@/data/profile";
+import { getEntry, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const about = await getEntry("pages", "about");
+
+if (!about) {
+  throw new Error(
+    "Missing content entry: `about.md` or `about.mdx` in `src/content/pages/`"
+  );
+}
+
+const { Content } = await render(about);
 ---
 
-<BaseLayout title="About" description={`About ${profile.name}, a software engineer in ${profile.location}.`}>
-  <section class="about-hero section narrow">
-    <img src="/assets/mohammad-avatar.png" alt="Portrait of Mohammad Mohammadi" width="160" height="160" />
-    <div>
-      <p class="eyebrow">About</p>
-      <h1>I build practical software and keep a public engineering trail.</h1>
-      <p class="lede">
-        I am Mohammad Mohammadi, a software engineer based in London. My public work points to a steady interest in backend systems, automation, job-search tooling, and open-source practice.
-      </p>
-    </div>
-  </section>
+<Layout
+  title={`${about.data.title} | ${config.site.title}`}
+  description={about.data.description}
+  ogImage={about.data.ogImage}
+  canonicalURL={about.data.canonicalURL}
+>
+  <Header />
 
-  <section class="section content-section narrow">
-    <h2>What I care about</h2>
-    <p>
-      I prefer software that has a clear job: help someone apply faster, automate a repetitive path, expose a clean API, or make a technical process easier to repeat. Python and FastAPI are comfortable tools for me, while TypeScript is useful when the interface needs to be direct and polished.
-    </p>
-    <p>
-      This site is meant to be the durable place for that work: projects, short notes, contact links, and context that should not be scattered across social profiles.
-    </p>
-  </section>
+  <Breadcrumb />
 
-  <section class="section content-section narrow" aria-labelledby="focus">
-    <h2 id="focus">Current focus</h2>
-    <div class="focus-list">
-      {profile.focus.map((item) => <span>{item}</span>)}
-    </div>
-  </section>
+  <Main pageTitle={about.data.title} class="app-prose">
+    <Content />
+  </Main>
 
-  <section class="section content-section" aria-labelledby="selected-projects">
-    <div class="section-heading">
-      <h2 id="selected-projects">Selected projects</h2>
-      <a href="/projects/">All projects</a>
-    </div>
-    <div class="project-grid">
-      {profile.projects.slice(0, 3).map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
-
-  <section id="contact" class="section content-section narrow">
-    <h2>Contact</h2>
-    <p>{profile.availability}</p>
-    <p class="contact-line">{profile.contactLabel}</p>
-    <SocialLinks />
-  </section>
-</BaseLayout>
+  <Footer />
+</Layout>

@@ -2,7 +2,9 @@
 
 Personal website and weblog for Mohammad Mohammadi.
 
-The site is intentionally static: Astro, TypeScript, Markdown content collections, system fonts, and no backend runtime. The homepage is the weblog index; durable profile, project, and contact context lives on `/about/`.
+The site uses AstroPaper as the base template, with the same blog-first shape
+that inspired this project from Peter Steinberger's personal site. The homepage
+is the weblog index; durable profile and contact context lives on `/about/`.
 
 ## Commands
 
@@ -11,6 +13,7 @@ npm install
 npm run dev
 npm run build
 npm run preview
+npm run lint
 ```
 
 ## Deploy
