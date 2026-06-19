@@ -26,6 +26,7 @@ Current areas of interest:
 
 - GitHub: [mohammadi-com](https://github.com/mohammadi-com)
 - LinkedIn: [mohammadmohammadi](https://www.linkedin.com/in/mohammadmohammadi)
+- X: [mohammadi_io](https://x.com/mohammadi_io)
 
 ## Contact
 
