@@ -7,6 +7,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
+import NewsletterForm from "@/components/NewsletterForm.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
@@ -91,6 +92,14 @@ const homePath = getRelativeLocaleUrl(locale, "");
         </div>
       </div>
     </section>
+
+    <NewsletterForm
+      featured
+      title="Join the signal"
+      description="Useful notes from the sharp end of building software: backend systems, automation, AI workflows, and hard-won lessons."
+      note="No cadence games. No funnel. Just the rare email worth opening."
+      buttonLabel="Send me the signal"
+    />
 
     {
       featuredPosts.length > 0 && (

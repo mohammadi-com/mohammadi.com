@@ -2,10 +2,22 @@
 import config from "@/config";
 
 type Props = {
+  buttonLabel?: string;
   compact?: boolean;
+  description?: string;
+  featured?: boolean;
+  note?: string;
+  title?: string;
 };
 
-const { compact = false } = Astro.props;
+const {
+  buttonLabel = "Subscribe",
+  compact = false,
+  description = "New posts, occasionally.",
+  featured = false,
+  note,
+  title = "Newsletter",
+} = Astro.props;
 const { newsletter } = config;
 
 const action =
@@ -18,12 +30,15 @@ const action =
   action && (
     <section
       class:list={[
-        "not-prose border-border border-y border-dashed py-6",
-        compact ? "my-6" : "my-8",
+        "not-prose border-border",
+        featured
+          ? "bg-muted/40 my-8 rounded-sm border p-5 sm:p-6"
+          : "border-y border-dashed py-6",
+        !featured && (compact ? "my-6" : "my-8"),
       ]}
     >
-      <h2 class="text-lg font-semibold">Newsletter</h2>
-      <p class="text-muted-foreground mt-2 text-sm">New posts, occasionally.</p>
+      <h2 class="text-lg font-semibold">{title}</h2>
+      <p class="text-muted-foreground mt-2 text-sm">{description}</p>
 
       <form
         action={action}
@@ -46,9 +61,11 @@ const action =
           type="submit"
           class="bg-accent text-background hover:bg-accent/90 min-h-11 rounded-sm px-4 py-2 text-sm font-medium"
         >
-          Subscribe
+          {buttonLabel}
         </button>
       </form>
+
+      {note && <p class="text-muted-foreground mt-3 text-xs">{note}</p>}
     </section>
   )
 }
