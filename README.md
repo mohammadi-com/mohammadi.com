@@ -1,4 +1,4 @@
-# mohammadi.com
+# Mohammadi.com
 
 Personal website and weblog for Mohammad Mohammadi.
 
