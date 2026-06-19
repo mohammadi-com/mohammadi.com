@@ -2,7 +2,11 @@
 set -euo pipefail
 
 HOST="${DEPLOY_HOST:?Set DEPLOY_HOST to the SSH target, for example username@example.com}"
-REMOTE_USER="${REMOTE_USER:-ubuntu}"
+REMOTE_USER="${REMOTE_USER:-${HOST%%@*}}"
+if [[ "$REMOTE_USER" == "$HOST" ]]; then
+  echo "Set DEPLOY_HOST as username@example.com or set REMOTE_USER." >&2
+  exit 1
+fi
 REMOTE_ROOT="${REMOTE_ROOT:-/var/www/mohammadi.com}"
 DOMAIN="${DOMAIN:-mohammadi.com}"
 WWW_DOMAIN="${WWW_DOMAIN:-www.mohammadi.com}"
