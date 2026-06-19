@@ -32,6 +32,10 @@ export default defineAstroPaperConfig({
     { name: "github", url: "https://github.com/mohammadi-com" },
     { name: "linkedin", url: "https://www.linkedin.com/in/mohammadmohammadi" },
   ],
+  newsletter: {
+    provider: "buttondown",
+    username: "mmohammadi",
+  },
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },
     { name: "facebook", url: "https://www.facebook.com/sharer.php?u=" },

@@ -90,12 +90,19 @@ interface ShareLink {
   linkTitle?: string;
 }
 
+interface NewsletterConfig {
+  provider: "buttondown";
+  username: string;
+}
+
 interface AstroPaperConfig {
   site: SiteConfig;
   posts?: PostsConfig;
   features?: FeaturesConfig;
   /** Social profile links shown in header/footer */
   socials?: SocialLink[];
+  /** Newsletter signup provider. */
+  newsletter?: NewsletterConfig | false;
   /** Share links shown on post detail pages */
   shareLinks?: ShareLink[];
 }
@@ -120,6 +127,7 @@ export interface ResolvedAstroPaperConfig {
   posts: Required<PostsConfig>;
   features: Required<FeaturesConfig>;
   socials: SocialLink[];
+  newsletter: NewsletterConfig | false;
   shareLinks: ShareLink[];
 }
 
